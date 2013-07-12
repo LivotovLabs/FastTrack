@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$//FastTrackApp.iml" filepath="$PROJECT_DIR$//FastTrackApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FastTrackApp.iml" filepath="$PROJECT_DIR$/FastTrackApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/actionbar-pulltorefresh.iml" filepath="$PROJECT_DIR$/modules/actionbar-pulltorefresh.iml" group="External Tools" />
       <module fileurl="file://$PROJECT_DIR$/modules/actionbarsherlock.iml" filepath="$PROJECT_DIR$/modules/actionbarsherlock.iml" group="External Tools" />
       <module fileurl="file://$PROJECT_DIR$/modules/android-menudrawer.iml" filepath="$PROJECT_DIR$/modules/android-menudrawer.iml" group="External Tools" />

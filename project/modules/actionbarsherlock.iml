@@ -10,6 +10,7 @@
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/actionbarsherlock/assets" />
         <option name="LIBS_FOLDER_RELATIVE_PATH" value="/actionbarsherlock/libs" />
         <option name="LIBRARY_PROJECT" value="true" />
+        <option name="UPDATE_PROPERTY_FILES" value="true" />
         <resOverlayFolders>
           <path>/actionbarsherlock/res-overlay</path>
         </resOverlayFolders>

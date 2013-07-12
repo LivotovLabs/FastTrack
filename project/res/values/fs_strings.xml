@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fs_dialog_progress_pleasewait">Please Wait...</string>
+    <string name="fs_dialog_yesno_yes">Yes</string>
+    <string name="fs_dialog_yesno_no">No</string>
+</resources>

@@ -59,5 +59,9 @@
             </intent-filter>
         </activity>
 
+        <activity
+                android:name=".screen.MainActivity"
+                android:label="@string/app_name" />
+
     </application>
 </manifest>
