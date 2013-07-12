@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="GEN_FOLDER_RELATIVE_PATH_APT" value="/actionbar-pulltorefresh/gen" />
+        <option name="GEN_FOLDER_RELATIVE_PATH_AIDL" value="/actionbar-pulltorefresh/gen" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/actionbar-pulltorefresh/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/actionbar-pulltorefresh/res" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/actionbar-pulltorefresh/assets" />
+        <option name="LIBS_FOLDER_RELATIVE_PATH" value="/actionbar-pulltorefresh/libs" />
+        <option name="LIBRARY_PROJECT" value="true" />
+        <resOverlayFolders>
+          <path>/actionbar-pulltorefresh/res-overlay</path>
+        </resOverlayFolders>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/actionbar-pulltorefresh">
+      <sourceFolder url="file://$MODULE_DIR$/actionbar-pulltorefresh/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/actionbar-pulltorefresh/gen" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="android-support-v13" level="project" />
+  </component>
+</module>
+

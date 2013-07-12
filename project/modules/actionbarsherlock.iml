@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="GEN_FOLDER_RELATIVE_PATH_APT" value="/actionbarsherlock/gen" />
+        <option name="GEN_FOLDER_RELATIVE_PATH_AIDL" value="/actionbarsherlock/gen" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/actionbarsherlock/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/actionbarsherlock/res" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/actionbarsherlock/assets" />
+        <option name="LIBS_FOLDER_RELATIVE_PATH" value="/actionbarsherlock/libs" />
+        <option name="LIBRARY_PROJECT" value="true" />
+        <resOverlayFolders>
+          <path>/actionbarsherlock/res-overlay</path>
+        </resOverlayFolders>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/actionbarsherlock">
+      <sourceFolder url="file://$MODULE_DIR$/actionbarsherlock/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/actionbarsherlock/gen" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="android-support-v13" level="project" />
+  </component>
+</module>
+

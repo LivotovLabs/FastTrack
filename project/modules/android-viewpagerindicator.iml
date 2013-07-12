@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="GEN_FOLDER_RELATIVE_PATH_APT" value="/android-viewpagerindicator/gen" />
+        <option name="GEN_FOLDER_RELATIVE_PATH_AIDL" value="/android-viewpagerindicator/gen" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/android-viewpagerindicator/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/android-viewpagerindicator/res" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/android-viewpagerindicator/assets" />
+        <option name="LIBS_FOLDER_RELATIVE_PATH" value="/android-viewpagerindicator/libs" />
+        <option name="LIBRARY_PROJECT" value="true" />
+        <resOverlayFolders>
+          <path>/android-viewpagerindicator/res-overlay</path>
+        </resOverlayFolders>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/android-viewpagerindicator">
+      <sourceFolder url="file://$MODULE_DIR$/android-viewpagerindicator/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/android-viewpagerindicator/gen" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="android-support-v13" level="project" />
+  </component>
+</module>
+
