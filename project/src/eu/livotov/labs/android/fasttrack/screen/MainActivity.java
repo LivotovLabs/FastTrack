@@ -1,6 +1,7 @@
 package eu.livotov.labs.android.fasttrack.screen;
 
 import android.os.Bundle;
+import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import eu.livotov.labs.android.fasttrack.App;
@@ -21,6 +22,11 @@ public class MainActivity extends BaseActivity
         setFrontMode(true);
     }
 
+    protected int getActionBarActionModeMenuResource()
+    {
+        return 0;
+    }
+
     protected int getActionBarItemsMenuResource()
     {
         return 0;
@@ -30,7 +36,20 @@ public class MainActivity extends BaseActivity
     {
     }
 
+    protected void onActionBarActionModeStarted(final ActionMode mode, final Menu menu)
+    {
+    }
+
+    protected void onActionBarActionModeStopped(final ActionMode mode)
+    {
+    }
+
     protected boolean onActionBarItemSelected(final MenuItem item)
+    {
+        return false;
+    }
+
+    protected boolean onActionBarActionModeItemSelected(final ActionMode mode, final MenuItem item)
     {
         return false;
     }

@@ -11,6 +11,7 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.livotov.labs.android.fasttrack.App;
 import eu.livotov.labs.android.fasttrack.R;
 import eu.livotov.labs.android.robotools.ui.RTDialogs;
+import net.simonvt.menudrawer.MenuDrawer;
 
 public abstract class BaseActivity extends SherlockFragmentActivity implements ActionMode.Callback
 {
