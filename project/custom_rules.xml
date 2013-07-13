@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="FastTrack Android build customization rules">
 
-    <property file="version.properties"/>
+    <property file="version.properties" />
+
+    <condition property="proguarded" value="off" else="on">
+        <equals arg1="${app.debuggable}" arg2="true" forcestring="true" casesensitive="false"/>
+    </condition>
 
     <target name="-pre-build">
 
         <replaceregexp
                 file="AndroidManifest.xml"
                 match='android:versionCode="(\d+)"'
-                replace='android:versionCode="${app.version.code}"'/>
+                replace='android:versionCode="${app.version.code}"' />
 
         <replaceregexp
                 file="AndroidManifest.xml"
                 match='android:versionName=".*"'
-                replace='android:versionName="${app.version.number}"'/>
+                replace='android:versionName="${app.version.number}"' />
 
         <replaceregexp
                 file="AndroidManifest.xml"
                 match="(android:debuggable=&#34;).*(&#34;)"
-                replace="\1${app.debuggable}\2"/>
+                replace="\1${app.debuggable}\2" />
 
     </target>
 
