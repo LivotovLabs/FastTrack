@@ -55,7 +55,7 @@ public class SplashActivity extends BaseActivity
         return 0;
     }
 
-    protected void onActionBarItemsReloaded(final Menu menu)
+    protected void onActionBarItemsStateUpdate(final Menu menu)
     {
     }
 

@@ -26,7 +26,7 @@ public class MainActivity extends BaseActivity
         return 0;
     }
 
-    protected void onActionBarItemsReloaded(final Menu menu)
+    protected void onActionBarItemsStateUpdate(final Menu menu)
     {
     }
 

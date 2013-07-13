@@ -5,17 +5,19 @@ import android.content.*;
 import android.os.Bundle;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import eu.livotov.labs.android.fasttrack.App;
 import eu.livotov.labs.android.fasttrack.R;
 import eu.livotov.labs.android.robotools.ui.RTDialogs;
 
-public abstract class BaseActivity extends SherlockFragmentActivity
+public abstract class BaseActivity extends SherlockFragmentActivity implements ActionMode.Callback
 {
 
     private BroadcastReceiver privateBroadcastsReceiver = new PrivateBroadcastsReceiver();
     private ProgressDialog progressDialog;
+    private ActionMode actionModeHandler;
 
     /**
      * Called when the activity is first created.
@@ -107,7 +109,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity
 
     public void showError(Throwable error, RTDialogs.RTModalDialogResultListener listener)
     {
-        RTDialogs.showMessageBox(this,R.drawable.ic_launcher,getString(R.string.fs_dialog_error_title),error.getMessage(), listener);
+        RTDialogs.showMessageBox(this, R.drawable.ic_launcher, getString(R.string.fs_dialog_error_title), error.getMessage(), listener);
     }
 
     public void showErrorAndFinish(Throwable error)
@@ -200,7 +202,13 @@ public abstract class BaseActivity extends SherlockFragmentActivity
             switch (item.getItemId())
             {
                 case android.R.id.home:
-                    finish();
+                    if (actionModeHandler != null)
+                    {
+                        finishActionMode();
+                    } else
+                    {
+                        finish();
+                    }
                     return true;
 
                 default:
@@ -219,7 +227,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity
         if (menuResource > 0)
         {
             getSupportMenuInflater().inflate(menuResource, menu);
-            onActionBarItemsReloaded(menu);
+            onActionBarItemsStateUpdate(menu);
             return true;
         } else
         {
@@ -227,11 +235,74 @@ public abstract class BaseActivity extends SherlockFragmentActivity
         }
     }
 
+    public void startActionMode()
+    {
+        if (getActionBarActionModeMenuResource() != 0)
+        {
+            finishActionMode();
+            startActionMode(this);
+        } else
+        {
+            throw new RuntimeException(String.format("Activity %s does not support action mode. Please return valid action mode menu resource ID from getActionBarActionModeMenuResource() method.", this.getClass().getCanonicalName()));
+        }
+    }
+
+    public void finishActionMode()
+    {
+        if (actionModeHandler != null)
+        {
+            actionModeHandler.finish();
+        }
+    }
+
+    public void toggleActionMode()
+    {
+        if (actionModeHandler != null)
+        {
+            finishActionMode();
+        } else
+        {
+            startActionMode();
+        }
+    }
+
+    public boolean onCreateActionMode(final ActionMode mode, final Menu menu)
+    {
+        mode.getMenuInflater().inflate(getActionBarActionModeMenuResource(), menu);
+        return true;
+    }
+
+    public boolean onPrepareActionMode(final ActionMode mode, final Menu menu)
+    {
+        onActionBarActionModeStarted(mode, menu);
+        return true;
+    }
+
+    public boolean onActionItemClicked(final ActionMode mode, final MenuItem item)
+    {
+        return onActionBarActionModeItemSelected(mode, item);
+    }
+
+    public void onDestroyActionMode(final ActionMode mode)
+    {
+        onActionBarActionModeStopped(mode);
+        actionModeHandler = null;
+    }
+
+
+    protected abstract int getActionBarActionModeMenuResource();
+
     protected abstract int getActionBarItemsMenuResource();
 
-    protected abstract void onActionBarItemsReloaded(final Menu menu);
+    protected abstract void onActionBarItemsStateUpdate(final Menu menu);
+
+    protected abstract void onActionBarActionModeStarted(final ActionMode mode, final Menu menu);
+
+    protected abstract void onActionBarActionModeStopped(final ActionMode mode);
 
     protected abstract boolean onActionBarItemSelected(final MenuItem item);
+
+    protected abstract boolean onActionBarActionModeItemSelected(final ActionMode mode, final MenuItem item);
 
     class PrivateBroadcastsReceiver extends BroadcastReceiver
     {
