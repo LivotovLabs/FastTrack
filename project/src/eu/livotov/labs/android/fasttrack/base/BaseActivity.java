@@ -61,12 +61,12 @@ public abstract class BaseActivity extends SherlockFragmentActivity
     {
     }
 
-    protected synchronized void showProgressDialog(boolean cancelable)
+    public synchronized void showProgressDialog(boolean cancelable)
     {
         showProgressDialog(0, cancelable);
     }
 
-    protected synchronized void showProgressDialog(final int messageRes, final boolean cancelable)
+    public synchronized void showProgressDialog(final int messageRes, final boolean cancelable)
     {
         if (progressDialog == null)
         {
@@ -86,7 +86,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity
         }
     }
 
-    protected synchronized void hideProgressDialog()
+    public synchronized void hideProgressDialog()
     {
         try
         {
@@ -100,47 +100,68 @@ public abstract class BaseActivity extends SherlockFragmentActivity
         }
     }
 
-    protected void showMessage(final String message)
+    public void showError(Throwable error)
+    {
+        showError(error, null);
+    }
+
+    public void showError(Throwable error, RTDialogs.RTModalDialogResultListener listener)
+    {
+        RTDialogs.showMessageBox(this,R.drawable.ic_launcher,getString(R.string.fs_dialog_error_title),error.getMessage(), listener);
+    }
+
+    public void showErrorAndFinish(Throwable error)
+    {
+        showError(error, new RTDialogs.RTModalDialogResultListener()
+        {
+            public void onDialogClosed()
+            {
+                finish();
+            }
+        });
+    }
+
+    public void showMessage(final String message)
     {
         showMessage(message, null);
     }
 
-    protected void showMessage(final int messageRes)
+    public void showMessage(final int messageRes)
     {
         showMessage(getString(messageRes), null);
     }
 
-    protected void showMessage(final int messageRes, RTDialogs.RTModalDialogResultListener dismissListener)
+    public void showMessage(final int messageRes, RTDialogs.RTModalDialogResultListener dismissListener)
     {
         showMessage(getString(messageRes), dismissListener);
     }
 
-    protected void showMessage(final String message, RTDialogs.RTModalDialogResultListener dismissListener)
+    public void showMessage(final String message, RTDialogs.RTModalDialogResultListener dismissListener)
     {
         RTDialogs.showMessageBox(this, R.drawable.ic_launcher, getString(R.string.app_name), message, dismissListener);
     }
 
-    protected void showQuestion(final int message, RTDialogs.RTYesNoDialogResultListener yesNoListener)
+    public void showQuestion(final int message, RTDialogs.RTYesNoDialogResultListener yesNoListener)
     {
         showQuestion(R.drawable.ic_launcher, getString(R.string.app_name), getString(message), yesNoListener);
     }
 
-    protected void showQuestion(final String message, RTDialogs.RTYesNoDialogResultListener yesNoListener)
+    public void showQuestion(final String message, RTDialogs.RTYesNoDialogResultListener yesNoListener)
     {
         showQuestion(R.drawable.ic_launcher, getString(R.string.app_name), message, yesNoListener);
     }
 
-    protected void showQuestion(final int icon, final String title, final String message, RTDialogs.RTYesNoDialogResultListener yesNoListener)
+    public void showQuestion(final int icon, final String title, final String message, RTDialogs.RTYesNoDialogResultListener yesNoListener)
     {
         RTDialogs.showYesNoDialog(this, icon, title, message, getString(R.string.fs_dialog_yesno_yes), getString(R.string.fs_dialog_yesno_no), yesNoListener);
     }
 
-    protected void requestUserInput(final int title, final int message, final int hint, final int defaultValue, RTDialogs.RTInputDialogResultListener resultListener)
+    public void requestUserInput(final int title, final int message, final int hint, final int defaultValue, RTDialogs.RTInputDialogResultListener resultListener)
     {
         requestUserInput(getString(title), getString(message), getString(hint), getString(defaultValue), resultListener);
     }
 
-    protected void requestUserInput(final String title, final String message, final String hint, final String defaultValue, RTDialogs.RTInputDialogResultListener resultListener)
+    public void requestUserInput(final String title, final String message, final String hint, final String defaultValue, RTDialogs.RTInputDialogResultListener resultListener)
     {
         RTDialogs.buildInputDialog(this)
                 .icon(R.drawable.ic_launcher)
@@ -151,7 +172,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity
                 .build(resultListener);
     }
 
-    protected void quit(Class quitToActivity, Intent extras)
+    public void quit(Class quitToActivity, Intent extras)
     {
         Intent quitIntent = new Intent(this, quitToActivity);
 
@@ -165,7 +186,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity
         startActivity(quitIntent);
     }
 
-    protected void setFrontMode(boolean front)
+    public void setFrontMode(boolean front)
     {
         ActionBar bar = getSupportActionBar();
         bar.setDisplayHomeAsUpEnabled(!front);
