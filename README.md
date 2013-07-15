@@ -37,7 +37,7 @@ Usage
 -----
 
 - Download the .zip copy of repository
-- Unzip and open unzipped folder in IntelliJ IDEA as a project
+- Unzip and open unzipped-folder/project in IntelliJ IDEA as a regualr project
 - Use IDEA's refactoring capabilities to change package name to one you want
 - Enjoy :)
 
@@ -80,6 +80,21 @@ Recommended way to work
 - To send a local broadcast:
   - App.sendPrivateBroadcast(...) - completely async, like normal Context.sendBroadcast
   - App.sendPrivateBroadcastAndWait(...) - method will be blocked until all broadcast receivers will process request
+
+
+Ant
+---
+
+Ant build script contains a custom rules file, which is automatically imported and used by ant. This adds the following features to your ant build process:
+
+- version name and version code from version.propeties file are automatically inserted into AndroidManifest.xml on build.
+- when app.debuggable property set to "true" in (version.properties), the folowing extra actions will tak place:
+  - android:debuggable="true" is set to AndroidManifest.xml
+  - proguard will be disabled
+
+And once app.debuggable is removed or set to "false", android:debuggable="true" statement will be automatically removed and proguard obfuscation is enabled.
+
+
 
 Soon
 ----
