@@ -74,10 +74,12 @@ Recommended way to work
 - To let your activity receive local broadcasts:
   - enablePrivateBroadcastsReceiver(...) to enable local broadcast listener for the specified intent filter
   - disablePrivateBroadcastsReceiver() to disable local broadcast listener for activity. Automatically disabled on activity death.
-  - override onPrivateBroadcastReceived(...) method to handle received local broadcasts
-  - call static method App.sendPrivateBroadcast(...) or sendPrivateBroadcastAndWait(...) to send private broadcasts
+  - override onPrivateBroadcastReceived(...) method to handle received local broadcast
   - use static App.registerPrivateBroadcastReceiver(...) / App.unregisterPrivateBroadcastReceiver(...) methods to register other listeners for private broadcasts
   
+- To send a local broadcast:
+  - App.sendPrivateBroadcast(...) - completely async, like normal Context.sendBroadcast
+  - App.sendPrivateBroadcastAndWait(...) - method will be blocked until all broadcast receivers will process request
 
 Soon
 ----
