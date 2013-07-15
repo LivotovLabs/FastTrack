@@ -3,6 +3,7 @@ package eu.livotov.labs.android.fasttrack.base;
 import android.app.ProgressDialog;
 import android.content.*;
 import android.os.Bundle;
+import android.text.TextUtils;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
@@ -11,7 +12,6 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.livotov.labs.android.fasttrack.App;
 import eu.livotov.labs.android.fasttrack.R;
 import eu.livotov.labs.android.robotools.ui.RTDialogs;
-import net.simonvt.menudrawer.MenuDrawer;
 
 public abstract class BaseActivity extends SherlockFragmentActivity implements ActionMode.Callback
 {
@@ -30,6 +30,11 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
         ActionBar bar = getSupportActionBar();
         bar.show();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+
+        if (getActivityLayoutResource()!=0)
+        {
+            setContentView(getActivityLayoutResource());
+        }
     }
 
     protected void onDestroy()
@@ -66,25 +71,34 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 
     public synchronized void showProgressDialog(boolean cancelable)
     {
-        showProgressDialog(0, cancelable);
+        showProgressDialog(0, cancelable, null);
     }
 
-    public synchronized void showProgressDialog(final int messageRes, final boolean cancelable)
+    public synchronized void showProgressDialog(final int messageRes, final boolean cancelable, final DialogInterface.OnCancelListener cancelListener)
+    {
+        showProgressDialog(getString(messageRes), cancelable, cancelListener);
+    }
+
+    public synchronized void showProgressDialog(final String message, final boolean cancelable, final DialogInterface.OnCancelListener cancelListener)
     {
         if (progressDialog == null)
         {
-            progressDialog = ProgressDialog.show(BaseActivity.this, getString(R.string.app_name), getString(messageRes), true, cancelable, new DialogInterface.OnCancelListener()
+            progressDialog = ProgressDialog.show(BaseActivity.this, getString(R.string.app_name), message, true, cancelable, new DialogInterface.OnCancelListener()
             {
                 public void onCancel(final DialogInterface dialogInterface)
                 {
                     progressDialog = null;
+                    if (cancelListener != null)
+                    {
+                        cancelListener.onCancel(dialogInterface);
+                    }
                 }
             });
         } else
         {
-            if (messageRes > 0)
+            if (!TextUtils.isEmpty(message))
             {
-                progressDialog.setMessage(getString(messageRes));
+                progressDialog.setMessage(message);
             }
         }
     }
@@ -290,6 +304,8 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
         actionModeHandler = null;
     }
 
+
+    protected abstract int getActivityLayoutResource();
 
     protected abstract int getActionBarActionModeMenuResource();
 
