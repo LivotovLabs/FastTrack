@@ -7,6 +7,7 @@ import com.actionbarsherlock.view.MenuItem;
 import eu.livotov.labs.android.fasttrack.App;
 import eu.livotov.labs.android.fasttrack.R;
 import eu.livotov.labs.android.fasttrack.base.BaseActivity;
+import eu.livotov.labs.android.fasttrack.util.UIAsyncTask;
 
 public class MainActivity extends BaseActivity
 {
@@ -18,8 +19,12 @@ public class MainActivity extends BaseActivity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         setFrontMode(true);
+    }
+
+    protected int getActivityLayoutResource()
+    {
+        return R.layout.activity_main;
     }
 
     protected int getActionBarActionModeMenuResource()

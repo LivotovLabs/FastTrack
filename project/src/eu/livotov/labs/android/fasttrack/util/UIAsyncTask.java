@@ -15,6 +15,9 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
     protected BaseActivity activity;
     protected String customMessage;
     protected boolean userCancelled;
+    protected boolean useActionBarProgress = true;
+    protected boolean showProgress = true;
+    protected boolean cancellable;
 
     public UIAsyncTask(BaseActivity activity)
     {
@@ -27,6 +30,31 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
         this.customMessage = customMessage;
     }
 
+    public UIAsyncTask message(final String customMessage)
+    {
+        this.customMessage = customMessage;
+        this.showProgress = true;
+        return this;
+    }
+
+    public UIAsyncTask displayProgress(final boolean showProgress)
+    {
+        this.showProgress = showProgress;
+        return this;
+    }
+
+    public UIAsyncTask useActionBarProgress(final boolean useActionBarProgress)
+    {
+        this.useActionBarProgress = useActionBarProgress;
+        return this;
+    }
+
+    public UIAsyncTask cancellable(boolean cancellable)
+    {
+        this.cancellable = cancellable;
+        return this;
+    }
+
     public Result performExecutionThread(final Param... parameters) throws Exception
     {
         return onUITaskBody(parameters);
@@ -34,15 +62,18 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
 
     public void onExecutionStarted()
     {
-        activity.showProgressDialog(customMessage, true, this);
+        showTaskProgressDialog();
     }
 
     public void onExecutionFinished(final Result result)
     {
-        if (!userCancelled && isActivityAlive())
+        if (isActivityAlive())
         {
-            activity.hideProgressDialog();
-            onUITaskFinished(result);
+            hideTaskPrograssDialog();
+            if (!userCancelled)
+            {
+                onUITaskFinished(result);
+            }
         }
     }
 
@@ -52,8 +83,9 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
 
         if (isActivityAlive())
         {
-            activity.hideProgressDialog();
-            if (!onUITaskFailed(error))
+            hideTaskPrograssDialog();
+
+            if (!userCancelled && !onUITaskFailed(error))
             {
                 activity.showError(error);
             }
@@ -62,9 +94,10 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
 
     public void onExecutionAborted()
     {
+        userCancelled = true;
         if (isActivityAlive())
         {
-            activity.hideProgressDialog();
+            hideTaskPrograssDialog();
             onUITaskCancelled();
         }
     }
@@ -78,6 +111,23 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
     {
         userCancelled = true;
         cancel(true);
+    }
+
+    private void showTaskProgressDialog()
+    {
+        if (showProgress)
+        {
+            activity.setUseActionBarProgress(useActionBarProgress);
+            activity.showProgressDialog(customMessage, cancellable, true, this);
+        }
+    }
+
+    private void hideTaskPrograssDialog()
+    {
+        if (showProgress)
+        {
+            activity.hideProgressDialog();
+        }
     }
 
     protected abstract void onUITaskPreExecute(final Param... params);

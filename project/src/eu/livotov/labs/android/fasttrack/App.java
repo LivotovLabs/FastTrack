@@ -72,7 +72,6 @@ public class App extends Application
 
     private void onInitializeAppInBackground() throws Exception
     {
-        Thread.sleep(3000L);
         //todo: place your non-instant initialization tasks here.
     }
 

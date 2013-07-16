@@ -20,7 +20,6 @@ public class SplashActivity extends BaseActivity
     {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_splash);
 
         if (App.isAppReady())
         {
@@ -44,6 +43,11 @@ public class SplashActivity extends BaseActivity
                 });
             }
         });
+    }
+
+    protected int getActivityLayoutResource()
+    {
+        return R.layout.activity_splash;
     }
 
     protected int getActionBarActionModeMenuResource()

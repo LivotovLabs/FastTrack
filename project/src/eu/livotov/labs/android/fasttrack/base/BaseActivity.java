@@ -9,6 +9,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.Window;
 import eu.livotov.labs.android.fasttrack.App;
 import eu.livotov.labs.android.fasttrack.R;
 import eu.livotov.labs.android.robotools.ui.RTDialogs;
@@ -18,6 +19,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 
     private BroadcastReceiver privateBroadcastsReceiver = new PrivateBroadcastsReceiver();
     private ProgressDialog progressDialog;
+    private boolean useActionBarProgress;
     private ActionMode actionModeHandler;
 
     /**
@@ -27,11 +29,15 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_PROGRESS);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
         ActionBar bar = getSupportActionBar();
         bar.show();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
-        if (getActivityLayoutResource()!=0)
+        if (getActivityLayoutResource() != 0)
         {
             setContentView(getActivityLayoutResource());
         }
@@ -69,51 +75,113 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
     {
     }
 
+    public void setUseActionBarProgress(final boolean useActionBarProgress)
+    {
+        this.useActionBarProgress = useActionBarProgress;
+    }
+
     public synchronized void showProgressDialog(boolean cancelable)
     {
-        showProgressDialog(0, cancelable, null);
+        showProgressDialog(0, cancelable, true, null);
     }
 
-    public synchronized void showProgressDialog(final int messageRes, final boolean cancelable, final DialogInterface.OnCancelListener cancelListener)
+    public synchronized void showProgressDialog(final int messageRes, final boolean cancelable, final boolean indeterminate, final DialogInterface.OnCancelListener cancelListener)
     {
-        showProgressDialog(getString(messageRes), cancelable, cancelListener);
+        showProgressDialog(getString(messageRes), cancelable, indeterminate, cancelListener);
     }
 
-    public synchronized void showProgressDialog(final String message, final boolean cancelable, final DialogInterface.OnCancelListener cancelListener)
+    public synchronized void showProgressDialog(final String message, final boolean cancelable, boolean indeterminate, final DialogInterface.OnCancelListener cancelListener)
     {
-        if (progressDialog == null)
+        if (useActionBarProgress)
         {
-            progressDialog = ProgressDialog.show(BaseActivity.this, getString(R.string.app_name), message, true, cancelable, new DialogInterface.OnCancelListener()
+            setSupportProgressBarIndeterminate(indeterminate);
+            setSupportProgressBarVisibility(true);
+
+            if (!indeterminate)
             {
-                public void onCancel(final DialogInterface dialogInterface)
-                {
-                    progressDialog = null;
-                    if (cancelListener != null)
-                    {
-                        cancelListener.onCancel(dialogInterface);
-                    }
-                }
-            });
+                setSupportProgress(0);
+            } else
+            {
+                setSupportProgressBarIndeterminateVisibility(true);
+            }
         } else
         {
-            if (!TextUtils.isEmpty(message))
+            if (progressDialog == null)
             {
-                progressDialog.setMessage(message);
+                progressDialog = ProgressDialog.show(BaseActivity.this, getString(R.string.app_name), message, true, cancelable, new DialogInterface.OnCancelListener()
+                {
+                    public void onCancel(final DialogInterface dialogInterface)
+                    {
+                        progressDialog = null;
+                        if (cancelListener != null)
+                        {
+                            cancelListener.onCancel(dialogInterface);
+                        }
+                    }
+                });
+
+                progressDialog.setIndeterminate(indeterminate);
+
+                if (!indeterminate)
+                {
+                    progressDialog.setProgress(0);
+                }
+            } else
+            {
+                if (!TextUtils.isEmpty(message))
+                {
+                    progressDialog.setMessage(message);
+                }
             }
         }
+    }
+
+    public synchronized void updateProgress(final String message)
+    {
+        if (progressDialog!=null)
+        {
+            progressDialog.setMessage(message);
+        }
+    }
+
+    public synchronized void updateProgress(final int percent)
+    {
+        if (progressDialog!=null && !progressDialog.isIndeterminate())
+        {
+            progressDialog.setProgress(percent);
+        }
+
+        setSupportProgress(percent);
+    }
+
+    public synchronized void updateProgress(final String message, final int percent)
+    {
+        updateProgress(message);
+        updateProgress(percent);
     }
 
     public synchronized void hideProgressDialog()
     {
         try
         {
-            progressDialog.hide();
-            progressDialog.dismiss();
+            if (progressDialog != null)
+            {
+                progressDialog.hide();
+                progressDialog.dismiss();
+            }
         } catch (Throwable ignored)
         {
         } finally
         {
             progressDialog = null;
+        }
+
+        try
+        {
+            setSupportProgressBarVisibility(false);
+            setSupportProgressBarIndeterminateVisibility(false);
+        } catch (Throwable ignored)
+        {
         }
     }
 
