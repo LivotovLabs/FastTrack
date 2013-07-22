@@ -1,4 +1,4 @@
-package eu.livotov.labs.android.fasttrack.util;
+package eu.livotov.labs.android.fasttrack.async;
 
 import android.content.DialogInterface;
 import android.util.Log;
@@ -15,6 +15,9 @@ import java.util.TimerTask;
 public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<Param, Progress, Result> implements DialogInterface.OnCancelListener
 {
 
+    private final String TAG = UIAsyncTask.class.getName();
+
+
     protected BaseActivity activity;
     protected String customMessage;
     protected boolean userCancelled;
@@ -27,12 +30,14 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
     public UIAsyncTask(BaseActivity activity)
     {
         this.activity = activity;
+        this.activity.addUiTask(this);
     }
 
     public UIAsyncTask(BaseActivity activity, String customMessage)
     {
         this.activity = activity;
         this.customMessage = customMessage;
+        this.activity.addUiTask(this);
     }
 
     public UIAsyncTask message(final String customMessage)
@@ -73,6 +78,8 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
 
     public void onExecutionStarted()
     {
+        Log.d(TAG, "start task");
+
         if (delayedProgress > 0)
         {
             busyTimer = new Timer();
@@ -98,8 +105,11 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
         }
     }
 
+
     public void onExecutionFinished(final Result result)
     {
+        Log.d(TAG, "finish task");
+
         cancelBusyTimer();
 
         if (isActivityAlive())
@@ -110,10 +120,13 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
                 onUITaskFinished(result);
             }
         }
+        activity.removeUiTask(this);
     }
 
     public void onExecutionFailed(final Throwable error)
     {
+        Log.d(TAG, "failed task");
+
         cancelBusyTimer();
         Log.e(activity.getClass().getSimpleName(), error.getMessage(), error);
 
@@ -126,10 +139,13 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
                 activity.showError(error);
             }
         }
+        activity.removeUiTask(this);
     }
 
     public void onExecutionAborted()
     {
+        Log.d(TAG, "abort task");
+
         cancelBusyTimer();
         userCancelled = true;
 
@@ -138,10 +154,12 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
             hideTaskPrograssDialog();
             onUITaskCancelled();
         }
+        activity.removeUiTask(this);
     }
 
     public void onCancel(final DialogInterface dialogInterface)
     {
+        Log.d(TAG, "cancel task");
         userCancelled = true;
         cancel(true);
     }

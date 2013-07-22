@@ -12,6 +12,8 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import eu.livotov.labs.android.fasttrack.App;
 import eu.livotov.labs.android.fasttrack.R;
+import eu.livotov.labs.android.fasttrack.async.TaskList;
+import eu.livotov.labs.android.fasttrack.async.UIAsyncTask;
 import eu.livotov.labs.android.robotools.ui.RTDialogs;
 
 public abstract class BaseActivity extends SherlockFragmentActivity implements ActionMode.Callback
@@ -21,6 +23,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
     private ProgressDialog progressDialog;
     private boolean useActionBarProgress;
     private ActionMode actionModeHandler;
+    private TaskList uiTaskList;
 
     /**
      * Called when the activity is first created.
@@ -32,6 +35,8 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 
         requestWindowFeature(Window.FEATURE_PROGRESS);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
+        uiTaskList = new TaskList();
 
         ActionBar bar = getSupportActionBar();
         bar.show();
@@ -59,6 +64,27 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
     {
         super.onPause();
         App.unregisterTopActivity(this);
+    }
+
+    protected void onStart()
+    {
+        super.onStart();
+    }
+
+    protected void onStop()
+    {
+        super.onStop();
+        uiTaskList.cancelAll();
+    }
+
+    public void addUiTask(UIAsyncTask uiAsyncTask)
+    {
+        uiTaskList.add(uiAsyncTask);
+    }
+
+    public void removeUiTask(UIAsyncTask uiAsyncTask)
+    {
+        uiTaskList.remove(uiAsyncTask);
     }
 
     protected void enablePrivateBroadcastsReceiver(IntentFilter filter)
@@ -138,7 +164,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 
     public synchronized void updateProgress(final String message)
     {
-        if (progressDialog!=null)
+        if (progressDialog != null)
         {
             progressDialog.setMessage(message);
         }
@@ -146,7 +172,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 
     public synchronized void updateProgress(final int percent)
     {
-        if (progressDialog!=null && !progressDialog.isIndeterminate())
+        if (progressDialog != null && !progressDialog.isIndeterminate())
         {
             progressDialog.setProgress(percent);
         }
