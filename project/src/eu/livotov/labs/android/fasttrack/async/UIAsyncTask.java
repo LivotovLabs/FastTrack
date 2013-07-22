@@ -78,8 +78,6 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
 
     public void onExecutionStarted()
     {
-        Log.d(TAG, "start task");
-
         if (delayedProgress > 0)
         {
             busyTimer = new Timer();
@@ -108,8 +106,6 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
 
     public void onExecutionFinished(final Result result)
     {
-        Log.d(TAG, "finish task");
-
         cancelBusyTimer();
 
         if (isActivityAlive())
@@ -125,8 +121,6 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
 
     public void onExecutionFailed(final Throwable error)
     {
-        Log.d(TAG, "failed task");
-
         cancelBusyTimer();
         Log.e(activity.getClass().getSimpleName(), error.getMessage(), error);
 
@@ -144,8 +138,6 @@ public abstract class UIAsyncTask<Param, Progress, Result> extends RTAsyncTask<P
 
     public void onExecutionAborted()
     {
-        Log.d(TAG, "abort task");
-
         cancelBusyTimer();
         userCancelled = true;
 
