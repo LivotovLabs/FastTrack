@@ -87,7 +87,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 
     public synchronized void showProgressDialog(final int messageRes, final boolean cancelable, final boolean indeterminate, final DialogInterface.OnCancelListener cancelListener)
     {
-        showProgressDialog(getString(messageRes), cancelable, indeterminate, cancelListener);
+        showProgressDialog(messageRes>0 ? getString(messageRes) : getString(R.string.fs_dialog_progress_pleasewait), cancelable, indeterminate, cancelListener);
     }
 
     public synchronized void showProgressDialog(final String message, final boolean cancelable, boolean indeterminate, final DialogInterface.OnCancelListener cancelListener)
