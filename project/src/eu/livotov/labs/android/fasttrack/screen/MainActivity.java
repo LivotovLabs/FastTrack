@@ -4,10 +4,8 @@ import android.os.Bundle;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import eu.livotov.labs.android.fasttrack.App;
 import eu.livotov.labs.android.fasttrack.R;
 import eu.livotov.labs.android.fasttrack.base.BaseActivity;
-import eu.livotov.labs.android.fasttrack.util.UIAsyncTask;
 
 public class MainActivity extends BaseActivity
 {

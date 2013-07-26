@@ -1,20 +1,17 @@
 package eu.livotov.labs.android.fasttrack.screen;
 
-import android.content.Intent;
 import android.os.Bundle;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import eu.livotov.labs.android.fasttrack.App;
 import eu.livotov.labs.android.fasttrack.R;
+import eu.livotov.labs.android.fasttrack._my_test.TestMainActivity;
 import eu.livotov.labs.android.fasttrack.base.BaseActivity;
 
 public class SplashActivity extends BaseActivity
 {
 
-    /**
-     * Called when the activity is first created.
-     */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
