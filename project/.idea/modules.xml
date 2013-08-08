@@ -4,9 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FastTrackApp.iml" filepath="$PROJECT_DIR$/FastTrackApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/actionbar-pulltorefresh.iml" filepath="$PROJECT_DIR$/modules/actionbar-pulltorefresh.iml" group="External Tools" />
-      <module fileurl="file://$PROJECT_DIR$/modules/actionbarsherlock.iml" filepath="$PROJECT_DIR$/modules/actionbarsherlock.iml" group="External Tools" />
-      <module fileurl="file://$PROJECT_DIR$/modules/android-menudrawer.iml" filepath="$PROJECT_DIR$/modules/android-menudrawer.iml" group="External Tools" />
       <module fileurl="file://$PROJECT_DIR$/modules/android-viewpagerindicator.iml" filepath="$PROJECT_DIR$/modules/android-viewpagerindicator.iml" group="External Tools" />
+      <module fileurl="file://$PROJECT_DIR$/../../s7/android/trunk/modules/appcompat/appcompat.iml" filepath="$PROJECT_DIR$/../../s7/android/trunk/modules/appcompat/appcompat.iml" group="External Tools" />
       <module fileurl="file://$PROJECT_DIR$/modules/googleplay-services.iml" filepath="$PROJECT_DIR$/modules/googleplay-services.iml" group="External Tools" />
       <module fileurl="file://$PROJECT_DIR$/modules/stickylistheaders.iml" filepath="$PROJECT_DIR$/modules/stickylistheaders.iml" group="External Tools" />
     </modules>
