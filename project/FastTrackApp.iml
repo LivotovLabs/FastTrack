@@ -20,8 +20,8 @@
     <orderEntry type="module" module-name="android-viewpagerindicator" />
     <orderEntry type="module" module-name="googleplay-services" />
     <orderEntry type="module" module-name="stickylistheaders" />
-    <orderEntry type="module" module-name="appcompat" />
     <orderEntry type="library" name="AppComoactLibs" level="project" />
+    <orderEntry type="module" module-name="appcompat" />
   </component>
 </module>
 
