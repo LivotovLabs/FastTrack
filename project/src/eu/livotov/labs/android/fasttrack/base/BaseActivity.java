@@ -50,6 +50,7 @@ public abstract class BaseActivity extends ActionBarActivity implements ActionMo
     protected void onDestroy()
     {
         disablePrivateBroadcastsReceiver();
+        uiTaskList.cancelAll();
         super.onDestroy();
     }
 
@@ -73,7 +74,6 @@ public abstract class BaseActivity extends ActionBarActivity implements ActionMo
     protected void onStop()
     {
         super.onStop();
-        uiTaskList.cancelAll();
     }
 
     public void addUiTask(UIAsyncTask uiAsyncTask)
