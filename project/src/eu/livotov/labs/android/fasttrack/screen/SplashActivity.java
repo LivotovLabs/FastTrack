@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import eu.livotov.labs.android.fasttrack.App;
 import eu.livotov.labs.android.fasttrack.R;
-import eu.livotov.labs.android.fasttrack._my_test.TestMainActivity;
 import eu.livotov.labs.android.fasttrack.base.BaseActivity;
 
 public class SplashActivity extends BaseActivity

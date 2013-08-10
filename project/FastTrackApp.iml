@@ -16,12 +16,11 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="FastTrackApp Libs" level="project" />
+    <orderEntry type="module" module-name="appcompat" />
     <orderEntry type="module" module-name="actionbar-pulltorefresh" />
     <orderEntry type="module" module-name="android-viewpagerindicator" />
     <orderEntry type="module" module-name="googleplay-services" />
     <orderEntry type="module" module-name="stickylistheaders" />
-    <orderEntry type="library" name="AppComoactLibs" level="project" />
-    <orderEntry type="module" module-name="appcompat" />
   </component>
 </module>
 
