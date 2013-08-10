@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:fastTrack="http://schemas.android.com/apk/res-auto">    <!-- your app prefix here -->
+
+    <item
+            android:id="@+id/menu_sample"
+            fastTrack:actionViewClass="android.support.v7.widget.SearchView"
+            fastTrack:showAsAction="always" />
+</menu>

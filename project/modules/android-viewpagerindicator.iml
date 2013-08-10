@@ -26,6 +26,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="FastTrackApp Libs" level="project" />
+    <orderEntry type="library" name="AppComoactLibs" level="project" />
   </component>
 </module>
 

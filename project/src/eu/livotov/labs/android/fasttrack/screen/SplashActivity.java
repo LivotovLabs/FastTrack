@@ -1,9 +1,9 @@
 package eu.livotov.labs.android.fasttrack.screen;
 
 import android.os.Bundle;
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
+import android.support.v7.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import eu.livotov.labs.android.fasttrack.App;
 import eu.livotov.labs.android.fasttrack.R;
 import eu.livotov.labs.android.fasttrack._my_test.TestMainActivity;

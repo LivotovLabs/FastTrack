@@ -18,35 +18,34 @@
 
 <resources>
 
-    <style name="FastTrack" parent="@style/Theme.Sherlock.Light"/>
+    <style name="FastTrack" parent="Theme.Base.AppCompat.Light.DarkActionBar" />
 
     <!-- Uncomment and adjust to your taste/needs instead of default line above
 
     <style name="FastTrack" parent="@style/Theme.Sherlock.Light">
 
-        <item name="android:windowBackground"></item>
-        <item name="android:listViewStyle">@style/FastTrack.List</item>
-        <item name="android:textViewStyle">@style/FastTrack.Text</item>
-        <item name="android:actionModeCloseDrawable"></item>
-        <item name="actionModeCloseDrawable"></item>
-        <item name="android:actionModeCloseButtonStyle"></item>
-        <item name="actionModeCloseButtonStyle"></item>
 
-        <item name="actionOverflowButtonStyle">@style/FastTrack.ActionOverflow</item>
-        <item name="android:actionOverflowButtonStyle">@style/FastTrack.ActionOverflow</item>
-        <item name="actionBarItemBackground"></item>
-        <item name="popupMenuStyle">@style/FastTrack.PopupMenu</item>
-        <item name="dropDownListViewStyle">@style/FastTrack.DropDownListView</item>
-        <item name="actionBarTabStyle">@style/FastTrack.ActionBarTabStyle</item>
-        <item name="actionDropDownStyle">@style/FastTrack.DropDownNav</item>
-        <item name="actionBarStyle">@style/FastTrack.solid_ActionBar</item>
-        <item name="android:popupMenuStyle">@style/FastTrack.PopupMenu</item>
-        <item name="android:dropDownListViewStyle">@style/FastTrack.DropDownListView</item>
-        <item name="android:actionBarTabStyle">@style/FastTrack.ActionBarTabStyle</item>
-        <item name="android:actionDropDownStyle">@style/FastTrack.DropDownNav</item>
-        <item name="android:actionBarStyle">@style/FastTrack.solid_ActionBar</item>
-        <item name="actionButtonStyle">@style/FastTrack.ActionButtonStyle</item>
-        <item name="android:actionButtonStyle">@style/FastTrack.ActionButtonStyle</item>
+    <item name="actionBarItemBackground"></item>
+    <item name="popupMenuStyle">@style/FastTrack.PopupMenu</item>
+    <item name="dropDownListViewStyle">@style/FastTrack.DownListViewStyle</item>
+    <item name="actionBarTabStyle">@style/FastTrack.ActionBarTabStyle</item>
+    <item name="actionDropDownStyle">@style/FastTrack.DropDownNav</item>
+    <item name="actionBarStyle">@style/FastTrack/ActionBar.Solid</item>
+    <item name="actionModeBackground"></item>
+    <item name="actionModeSplitBackground"></item>
+    <item name="actionModeCloseButtonStyle">@style/FastTrack/ActionButton.CloseMode</item>
+    <item name="android:actionBarItemBackground"></item>
+    <item name="android:popupMenuStyle">@style/FastTrack.PopupMenu</item>
+    <item name="android:dropDownListViewStyle">@style/FastTrack.DownListViewStyle</item>
+    <item name="android:actionBarTabStyle">@style/FastTrack.ActionBarTabStyle</item>
+    <item name="android:actionDropDownStyle">@style/FastTrack.DropDownNav</item>
+    <item name="android:actionBarStyle">@style/FastTrack/ActionBar.Solid</item>
+    <item name="android:actionModeBackground"></item>
+    <item name="android:actionModeSplitBackground"></item>
+    <item name="android:actionModeCloseButtonStyle">@style/FastTrack/ActionButton.CloseMode</item>
+
+    <item name="actionBarWidgetTheme"></item>
+    <item name="android:actionBarWidgetTheme"></item>
 
     </style>
 
@@ -62,75 +61,55 @@
         <item name="homeAsUpIndicator"></item>
     </style>
 
-    <style name="FastTrack.ActionOverflow" parent="Widget.Sherlock.Light.ActionButton.Overflow">
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:minWidth">32dp</item>
-        <item name="android:paddingLeft">0dip</item>
-        <item name="android:paddingRight">0dip</item>
-    </style>
-
-    <style name="FastTrack.solid_ActionBar" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
+    <style name="FastTrack.ActionBar.Solid" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background"></item>
         <item name="backgroundStacked"></item>
         <item name="backgroundSplit"></item>
-        <item name="progressBarStyle">@style/FastTrack.ProgressBar</item>
-        <item name="titleTextStyle">@style/FastTrack.solid_ActionBar.TitleTextStyle</item>
-
-        <item name="android:titleTextStyle">@style/FastTrack.solid_ActionBar.TitleTextStyle</item>
+        <item name="progressBarStyle"></item>
         <item name="android:background"></item>
         <item name="android:backgroundStacked"></item>
         <item name="android:backgroundSplit"></item>
-        <item name="android:progressBarStyle">@style/FastTrack.ProgressBar</item>
-
-
+        <item name="android:progressBarStyle"></item>
     </style>
 
-    <style name="FastTrack.solid_ActionBar.TitleTextStyle" parent="TextAppearance.Sherlock.Widget.ActionBar.Title">
-        <item name="android:textColor"></item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">17sp</item>
-    </style>
-
-    <style name="FastTrack.ActionButtonStyle" parent="Widget.Sherlock.ActionButton">
-        <item name="android:paddingLeft">0dip</item>
-        <item name="android:paddingRight">0dip</item>
-        <item name="android:minWidth">40dp</item>
-        <item name="android:scaleType">fitCenter</item>
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-
-    <style name="FastTrack.transparent_ActionBar" parent="@style/Widget.Sherlock.ActionBar">
-        <item name="background"></item>
-        <item name="progressBarStyle">@style/FastTrack.ProgressBar</item>
-
+    <style name="FastTrack.ActionBar.Transparent" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">/item>
+        <item name="progressBarStyle"></item>
         <item name="android:background"></item>
-        <item name="android:progressBarStyle">@style/FastTrack.ProgressBar</item>
+        <item name="android:progressBarStyle"></item>
     </style>
 
-    <style name="FastTrack.PopupMenu" parent="@style/Widget.Sherlock.ListPopupWindow">
+    <style name="FastTrack.PopupMenu" parent="@style/Widget.AppCompat.PopupMenu">
         <item name="android:popupBackground"></item>
     </style>
 
-    <style name="FastTrack.DropDownListView" parent="@style/Widget.Sherlock.ListView.DropDown">
+    <style name="FastTrack.DropDownListView" parent="@style/Widget.AppCompat.ListView.DropDown">
         <item name="android:listSelector"></item>
     </style>
 
-    <style name="FastTrack.ActionBarTabStyle" parent="@style/Widget.Sherlock.ActionBar.TabView">
-        <item name="background"></item>
-
+    <style name="FastTrack.ActionBarTabStyle" parent="@style/Widget.AppCompat.ActionBar.TabView">
         <item name="android:background"></item>
     </style>
 
-    <style name="FastTrack.DropDownNav" parent="@style/Widget.Sherlock.Spinner.DropDown.ActionBar">
-        <item name="background"></item>
-
+    <style name="FastTrack.DropDownNav" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
         <item name="android:background"></item>
         <item name="android:popupBackground"></item>
         <item name="android:dropDownSelector"></item>
     </style>
 
-    <style name="FastTrack.ProgressBar" parent="@style/Widget.Sherlock.ProgressBar.Horizontal">
+    <style name="FastTrack.ProgressBar" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressDrawable"></item>
+    </style>
+
+    <style name="FastTrack.ActionButton.CloseMode" parent="@style/Widget.AppCompat.ActionButton.CloseMode">
+        <item name="android:background"></item>
+    </style>
+
+    <style name="FastTrack.Theme" parent="@style/Theme.AppCompat">
+        <item name="popupMenuStyle">@style/FastTrack.PopupMenu</item>
+        <item name="dropDownListViewStyle">@style/FastTrack.DropDownListView</item>
+        <item name="android:popupMenuStyle">@style/FastTrack.PopupMenu</item>
+        <item name="android:dropDownListViewStyle">@style/FastTrack.DropDownListView</item>
     </style>
     -->
 

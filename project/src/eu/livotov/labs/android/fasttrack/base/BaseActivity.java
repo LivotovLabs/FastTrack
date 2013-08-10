@@ -3,20 +3,20 @@ package eu.livotov.labs.android.fasttrack.base;
 import android.app.ProgressDialog;
 import android.content.*;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.view.ActionMode;
 import android.text.TextUtils;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.Window;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.Window;
 import eu.livotov.labs.android.fasttrack.App;
 import eu.livotov.labs.android.fasttrack.R;
 import eu.livotov.labs.android.fasttrack.async.TaskList;
 import eu.livotov.labs.android.fasttrack.async.UIAsyncTask;
 import eu.livotov.labs.android.robotools.ui.RTDialogs;
 
-public abstract class BaseActivity extends SherlockFragmentActivity implements ActionMode.Callback
+public abstract class BaseActivity extends ActionBarActivity implements ActionMode.Callback
 {
 
     private BroadcastReceiver privateBroadcastsReceiver = new PrivateBroadcastsReceiver();
@@ -34,7 +34,6 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_PROGRESS);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         uiTaskList = new TaskList();
 
@@ -51,6 +50,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
     protected void onDestroy()
     {
         disablePrivateBroadcastsReceiver();
+        uiTaskList.cancelAll();
         super.onDestroy();
     }
 
@@ -74,7 +74,6 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
     protected void onStop()
     {
         super.onStop();
-        uiTaskList.cancelAll();
     }
 
     public void addUiTask(UIAsyncTask uiAsyncTask)
@@ -335,7 +334,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 
         if (menuResource > 0)
         {
-            getSupportMenuInflater().inflate(menuResource, menu);
+            getMenuInflater().inflate(menuResource, menu);
             onActionBarItemsStateUpdate(menu);
             return true;
         } else
@@ -349,7 +348,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
         if (getActionBarActionModeMenuResource() != 0)
         {
             finishActionMode();
-            startActionMode(this);
+            startSupportActionMode(this);
         } else
         {
             throw new RuntimeException(String.format("Activity %s does not support action mode. Please return valid action mode menu resource ID from getActionBarActionModeMenuResource() method.", this.getClass().getCanonicalName()));
