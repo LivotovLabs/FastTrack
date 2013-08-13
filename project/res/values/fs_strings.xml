@@ -4,4 +4,6 @@
     <string name="fs_dialog_yesno_yes">Yes</string>
     <string name="fs_dialog_yesno_no">No</string>
     <string name="fs_dialog_error_title">Error</string>
+    <string name="fs_menudrawer_toggle_desc_open">Open Menu Drawer</string>
+    <string name="fs_menudrawer_toggle_desc_close">Close Menu Drawer</string>
 </resources>

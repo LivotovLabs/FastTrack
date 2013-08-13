@@ -46,6 +46,16 @@ public class SplashActivity extends BaseActivity
         return R.layout.activity_splash;
     }
 
+    protected int getMenuDrawerLayoutId()
+    {
+        return 0;
+    }
+
+    protected int getMenuDrawerToggleIconResource()
+    {
+        return 0;
+    }
+
     protected int getActionBarActionModeMenuResource()
     {
         return 0;
@@ -81,5 +91,15 @@ public class SplashActivity extends BaseActivity
     protected boolean onActionBarActionModeItemSelected(final ActionMode mode, final MenuItem item)
     {
         return false;
+    }
+
+    protected void onMenuDrawerOpened()
+    {
+
+    }
+
+    protected void onMenuDrawerClosed()
+    {
+
     }
 }

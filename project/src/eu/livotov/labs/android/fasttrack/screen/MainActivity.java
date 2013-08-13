@@ -25,6 +25,16 @@ public class MainActivity extends BaseActivity
         return R.layout.activity_main;
     }
 
+    protected int getMenuDrawerLayoutId()
+    {
+        return 0;
+    }
+
+    protected int getMenuDrawerToggleIconResource()
+    {
+        return 0;
+    }
+
     protected int getActionBarActionModeMenuResource()
     {
         return 0;
@@ -55,5 +65,15 @@ public class MainActivity extends BaseActivity
     protected boolean onActionBarActionModeItemSelected(final ActionMode mode, final MenuItem item)
     {
         return false;
+    }
+
+    protected void onMenuDrawerOpened()
+    {
+
+    }
+
+    protected void onMenuDrawerClosed()
+    {
+
     }
 }

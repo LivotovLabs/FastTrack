@@ -2,14 +2,15 @@ package eu.livotov.labs.android.fasttrack.base;
 
 import android.app.ProgressDialog;
 import android.content.*;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.Window;
+import android.view.*;
 import eu.livotov.labs.android.fasttrack.App;
 import eu.livotov.labs.android.fasttrack.R;
 import eu.livotov.labs.android.fasttrack.async.TaskList;
@@ -24,6 +25,8 @@ public abstract class BaseActivity extends ActionBarActivity implements ActionMo
     private boolean useActionBarProgress;
     private ActionMode actionModeHandler;
     private TaskList uiTaskList;
+    protected DrawerLayout menuDrawer;
+    protected ActionBarDrawerToggle menuDrawerToggle;
 
     /**
      * Called when the activity is first created.
@@ -76,6 +79,42 @@ public abstract class BaseActivity extends ActionBarActivity implements ActionMo
         super.onStop();
     }
 
+    protected void onPostCreate(Bundle savedInstanceState)
+    {
+        super.onPostCreate(savedInstanceState);
+        if (menuDrawerToggle != null)
+        {
+            menuDrawerToggle.syncState();
+        }
+    }
+
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        if (menuDrawerToggle != null)
+        {
+            menuDrawerToggle.onConfigurationChanged(newConfig);
+        }
+    }
+
+    public void setContentView(final int layoutResID)
+    {
+        super.setContentView(layoutResID);
+        initContentRelatedStuff();
+    }
+
+    public void setContentView(final View view)
+    {
+        super.setContentView(view);
+        initContentRelatedStuff();
+    }
+
+    public void setContentView(final View view, final ViewGroup.LayoutParams params)
+    {
+        super.setContentView(view, params);
+        initContentRelatedStuff();
+    }
+
     public void addUiTask(UIAsyncTask uiAsyncTask)
     {
         uiTaskList.add(uiAsyncTask);
@@ -112,7 +151,7 @@ public abstract class BaseActivity extends ActionBarActivity implements ActionMo
 
     public synchronized void showProgressDialog(final int messageRes, final boolean cancelable, final boolean indeterminate, final DialogInterface.OnCancelListener cancelListener)
     {
-        showProgressDialog(messageRes>0 ? getString(messageRes) : getString(R.string.fs_dialog_progress_pleasewait), cancelable, indeterminate, cancelListener);
+        showProgressDialog(messageRes > 0 ? getString(messageRes) : getString(R.string.fs_dialog_progress_pleasewait), cancelable, indeterminate, cancelListener);
     }
 
     public synchronized void showProgressDialog(final String message, final boolean cancelable, boolean indeterminate, final DialogInterface.OnCancelListener cancelListener)
@@ -298,13 +337,21 @@ public abstract class BaseActivity extends ActionBarActivity implements ActionMo
 
     public void setFrontMode(boolean front)
     {
-        ActionBar bar = getSupportActionBar();
-        bar.setDisplayHomeAsUpEnabled(!front);
+        if (menuDrawerToggle == null)
+        {
+            ActionBar bar = getSupportActionBar();
+            bar.setDisplayHomeAsUpEnabled(!front);
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
+        if (menuDrawerToggle != null && menuDrawerToggle.onOptionsItemSelected(item))
+        {
+            return true;
+        }
+
         if (!onActionBarItemSelected(item))
         {
             switch (item.getItemId())
@@ -397,8 +444,83 @@ public abstract class BaseActivity extends ActionBarActivity implements ActionMo
         actionModeHandler = null;
     }
 
+    private void initContentRelatedStuff()
+    {
+        if (getMenuDrawerLayoutId() > 0)
+        {
+            initMenuDrawer();
+        }
+    }
+
+    private void initMenuDrawer()
+    {
+        menuDrawer = (DrawerLayout) findViewById(getMenuDrawerLayoutId());
+
+        if (getMenuDrawerToggleIconResource() > 0)
+        {
+            menuDrawerToggle = new ActionBarDrawerToggle(this, menuDrawer, getMenuDrawerToggleIconResource(), R.string.fs_menudrawer_toggle_desc_open, R.string.fs_menudrawer_toggle_desc_close)
+            {
+
+                public void onDrawerSlide(final View view, final float v)
+                {
+                    super.onDrawerSlide(view, v);
+                    onMenuDrawerSlide(view, v);
+                }
+
+                public void onDrawerOpened(final View view)
+                {
+                    super.onDrawerOpened(view);
+                    onMenuDrawerOpened();
+                }
+
+                public void onDrawerClosed(final View view)
+                {
+                    super.onDrawerClosed(view);
+                    onMenuDrawerClosed();
+                }
+
+                public void onDrawerStateChanged(final int i)
+                {
+                    super.onDrawerStateChanged(i);
+                    onMenuDrawerStateChanged(i);
+                }
+            };
+
+            menuDrawer.setDrawerListener(menuDrawerToggle);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        } else
+        {
+            menuDrawer.setDrawerListener(new DrawerLayout.DrawerListener()
+            {
+                public void onDrawerSlide(final View view, final float v)
+                {
+                    onMenuDrawerSlide(view, v);
+                }
+
+                public void onDrawerOpened(final View view)
+                {
+                    onMenuDrawerOpened();
+                }
+
+                public void onDrawerClosed(final View view)
+                {
+                    onMenuDrawerClosed();
+                }
+
+                public void onDrawerStateChanged(final int i)
+                {
+                    onMenuDrawerStateChanged(i);
+                }
+            });
+        }
+    }
 
     protected abstract int getActivityLayoutResource();
+
+    protected abstract int getMenuDrawerLayoutId();
+
+    protected abstract int getMenuDrawerToggleIconResource();
 
     protected abstract int getActionBarActionModeMenuResource();
 
@@ -413,6 +535,18 @@ public abstract class BaseActivity extends ActionBarActivity implements ActionMo
     protected abstract boolean onActionBarItemSelected(final MenuItem item);
 
     protected abstract boolean onActionBarActionModeItemSelected(final ActionMode mode, final MenuItem item);
+
+    protected abstract void onMenuDrawerOpened();
+
+    protected abstract void onMenuDrawerClosed();
+
+    protected void onMenuDrawerStateChanged(int state)
+    {
+    }
+
+    protected void onMenuDrawerSlide(final View view, final float v)
+    {
+    }
 
     class PrivateBroadcastsReceiver extends BroadcastReceiver
     {
