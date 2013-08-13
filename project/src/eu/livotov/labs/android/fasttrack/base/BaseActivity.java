@@ -36,7 +36,7 @@ public abstract class BaseActivity extends ActionBarActivity implements ActionMo
     {
         super.onCreate(savedInstanceState);
 
-        requestWindowFeature(Window.FEATURE_PROGRESS);
+        supportRequestWindowFeature(Window.FEATURE_PROGRESS);
 
         uiTaskList = new TaskList();
 
