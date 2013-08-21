@@ -519,7 +519,7 @@ public abstract class BaseActivity extends ActionBarActivity implements ActionMo
         }
     }
 
-    private void showDialog(DialogFragment dialog)
+    public void showDialog(DialogFragment dialog)
     {
         dismissDialog();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -527,7 +527,7 @@ public abstract class BaseActivity extends ActionBarActivity implements ActionMo
         dialog.show(ft, "fstdialog");
     }
 
-    private void dismissDialog()
+    public void dismissDialog()
     {
         Fragment prev = getSupportFragmentManager().findFragmentByTag("fstdialog");
 
