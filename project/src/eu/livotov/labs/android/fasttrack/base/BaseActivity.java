@@ -5,6 +5,9 @@ import android.content.*;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -513,6 +516,26 @@ public abstract class BaseActivity extends ActionBarActivity implements ActionMo
                     onMenuDrawerStateChanged(i);
                 }
             });
+        }
+    }
+
+    private void showDialog(DialogFragment dialog)
+    {
+        dismissDialog();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.addToBackStack(null);
+        dialog.show(ft, "fstdialog");
+    }
+
+    private void dismissDialog()
+    {
+        Fragment prev = getSupportFragmentManager().findFragmentByTag("fstdialog");
+
+        if (prev != null)
+        {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.remove(prev);
+            ft.commit();
         }
     }
 
