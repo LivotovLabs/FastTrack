@@ -8,8 +8,8 @@ app idea and not on every-app routine tasks.
 
 Deprecation Notice
 ------------------
-Thanks to great gradle support in Android SDK and the power of AAR packaging, FastTrack project is now beging
-merged with [RoboTools 2](https://github.com/LivotovLabs/RoboTools). This (FastTrack) repository is now deprecated and will no longer be updated or maintained. Please check for project updates and new features as well as post issues, star/fork only there from now - at [RoboTools repository](https://github.com/LivotovLabs/RoboTools)
+Thanks to great gradle support in Android SDK and the power of AAR packaging, FastTrack project is now being
+merged with [RoboTools 2](https://github.com/LivotovLabs/RoboTools). This (FastTrack) repository is now deprecated and will no longer be updated or maintained. For all future project updates please refer to [RoboTools repository](https://github.com/LivotovLabs/RoboTools) from now.
 
 
 
