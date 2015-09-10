@@ -1,15 +1,19 @@
+
+Deprecation Notice
+===
+Thanks to great gradle support in Android SDK and the power of AAR packaging, FastTrack project is now being
+merged with [RoboTools 2](https://github.com/LivotovLabs/RoboTools). This (FastTrack) repository is now deprecated and will no longer be updated or maintained. For all future project updates please refer to [RoboTools repository](https://github.com/LivotovLabs/RoboTools) from now.
+
+
+
+
+
 FastTrack
 =========
 
 A basic android app skeleton, completely ready to use as a basement for your every new android project. 
 It also contains some general routines and base methods and classes to help you spend more time on your original
 app idea and not on every-app routine tasks.
-
-
-Deprecation Notice
-------------------
-Thanks to great gradle support in Android SDK and the power of AAR packaging, FastTrack project is now being
-merged with [RoboTools 2](https://github.com/LivotovLabs/RoboTools). This (FastTrack) repository is now deprecated and will no longer be updated or maintained. For all future project updates please refer to [RoboTools repository](https://github.com/LivotovLabs/RoboTools) from now.
 
 
 
